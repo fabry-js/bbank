@@ -32,29 +32,45 @@ const Register = () => {
 
   const showAccountCreatedToast = () =>
     toast({
-      title: "Account Creato con successo, si festeggia!🎉",
-      description: "Controlla la tua E-Mail per la verifica!",
+      title: "Successfully created your account, yee!",
+      description: "Check your e-mail for verification",
       status: "success",
-      duration: 9000,
+      duration: 10000,
       isClosable: true,
     });
-  const showAccountCouldNotBeCreatedToast = () =>
-    toast({
-      title: "Non ci voleva, non è stato possibile creare l'account!😢",
-      description: "Forse hai già usato questa email",
+  const showAccountCouldNotBeCreatedToast = (errorCode: string) => {
+    let shownErrMessage = "";
+    switch (errorCode) {
+      case "auth/weak-password":
+        shownErrMessage = "Password should be at least 6 characters"
+        break;
+      case "auth/email-already-in-use":
+        shownErrMessage = "E-Mail is already in use"
+        break;
+      default:
+        shownErrMessage = "Unknown error (Maybe a network one?)"
+        break;
+    }
+    return(
+      toast({
+      title: "Oh no, something went wrong with your account's creation!😢",
+      description: shownErrMessage,
       status: "error",
       duration: 9000,
       isClosable: true,
-    });
+    }))};
 
   const onSubmit = (data: any) => {
     createUserWithEmailAndPassword(_auth, data.email, data.password)
       .then((_userCredential) => {
         showAccountCreatedToast();
-        // forse firebase invia automaticamente la verify...
+        // TODO: Quando un nuovo utente joina, inviare una notifica al master panel (il mio personale eheh)
         navigate("/", {replace: true})
       })
-      .catch(() => showAccountCouldNotBeCreatedToast());
+      .catch((firebaseError) => {
+        const errorCode = firebaseError.code
+        showAccountCouldNotBeCreatedToast(errorCode)
+      });
   };
   const { register, handleSubmit } = useForm();
 
@@ -69,7 +85,7 @@ const Register = () => {
           <form onSubmit={handleSubmit(onSubmit)}>
             <Input
               border="2px"
-              borderColor="green.500"
+              borderColor="purple.500"
               placeholder="E-Mail"
               size="lg"
               {...register("email")}
@@ -79,7 +95,7 @@ const Register = () => {
                 type={showPasswordText ? "text" : "password"}
                 border="2px"
                 mt="1"
-                borderColor="green.500"
+                borderColor="purple.500"
                 placeholder="Password"
                 size="lg"
                 {...register("password")}
@@ -104,7 +120,7 @@ const Register = () => {
             <Button
               size="lg"
               border="2px"
-              borderColor="green.500"
+              borderColor="purple.500"
               variant="outline"
               type="submit"
               mt="1"

@@ -1,9 +1,8 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import {
   Button,
   Center,
   Container,
-  Image,
   Input,
   InputGroup,
   InputRightElement,
@@ -16,7 +15,7 @@ import { useForm } from "react-hook-form";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import TopNavBar from "../../components/nav-bar/TopNavBar";
 import { UserContext } from "../../providers/GAuthProvider";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { _auth } from "../../utils/firebase/firebase";
 
 const Login = () => {
@@ -24,7 +23,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   if (actualUser) {
-    navigate("/")
+    navigate("/dashboard")
   }
 
   const [showPasswordText, setShowPasswordText] = useState<boolean>(false);
@@ -32,16 +31,15 @@ const Login = () => {
 
   const showLoggedSuccessfullyToast = () =>
     toast({
-      title: "Login Eseguito con successo! 🎉",
-      description: "Fantastico!",
+      title: "Successfully logged in! 🦾",
+      description: "Good Work!",
       status: "success",
       duration: 9000,
       isClosable: true,
     });
   const showCouldNotBeLoggedInToast = () =>
     toast({
-      title: "Oh no no, password o username errati!😢",
-      description: "Mannaggia, puoi riprovare per favore? Graziee!",
+      title: "Damn! E-mail or password not matching",
       status: "error",
       duration: 9000,
       isClosable: true,
@@ -51,7 +49,7 @@ const Login = () => {
     signInWithEmailAndPassword(_auth, data.email, data.password)
       .then((_userCredential) => {
         showLoggedSuccessfullyToast();
-        navigate("/", {replace: true})
+        navigate("/dashboard", {replace: true})
       })
       .catch(() => showCouldNotBeLoggedInToast());
   };
@@ -68,7 +66,7 @@ const Login = () => {
           <form onSubmit={handleSubmit(onSubmit)}>
             <Input
               border="2px"
-              borderColor="green.500"
+              borderColor="purple.500"
               placeholder="E-Mail"
               size="lg"
               {...register("email")}
@@ -78,7 +76,7 @@ const Login = () => {
                 type={showPasswordText ? "text" : "password"}
                 border="2px"
                 mt="1"
-                borderColor="green.500"
+                borderColor="purple.500"
                 placeholder="Password"
                 size="lg"
                 {...register("password")}
@@ -103,7 +101,7 @@ const Login = () => {
             <Button
               size="lg"
               border="2px"
-              borderColor="green.500"
+              borderColor="purple.500"
               variant="outline"
               type="submit"
               mt="1"
@@ -112,6 +110,9 @@ const Login = () => {
               Login! 🚀
             </Button>
           </form>
+          <Text fontSize="p">
+            Don't have an account yet? <Link to="/register">Click here!</Link>
+          </Text>
         </Stack>
       </Container>
     </>
