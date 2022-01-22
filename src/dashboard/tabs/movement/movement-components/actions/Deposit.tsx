@@ -7,31 +7,27 @@ import {
   Center,
   Text,
 } from "@chakra-ui/react";
-import { FC, useContext, useEffect, useState } from "react";
-import { UserContext } from "../../../../../providers/GAuthProvider";
-import { retrieveAllItemsFromDatabase } from "../../../../../utils/firebase/dbOperations";
+import { FC, useEffect } from "react";
 import { ItemComponent } from "./components/ItemComponent";
-import { Item } from "./models/items";
+import { useDispatch, useSelector } from "react-redux";
+import { getCurrentDbItems, retrieveAllDbItems } from "../../../../../utils/store/slices/itemsSlice";
 
 export const DepositTab: FC = () => {
-  const { actualUser } = useContext(UserContext);
   /**
    * Retrieval is always shown.
    */
-  const itemsToRetrieve = (): Item[] => {
-    let r: Item[] = [];
-    retrieveAllItemsFromDatabase(actualUser).then((items) => {
-      return items.forEach((item) => r.push(item));
-    });
-    return r;
-  };
-  const [dbItems, setDbItems] = useState<Item[]>(itemsToRetrieve);
-  console.log(dbItems);
+  // Redux here...
+  const dispatch = useDispatch()
+  const items = useSelector(getCurrentDbItems)
+  useEffect(() => {
+    dispatch(retrieveAllDbItems())
+  }, [])
+  console.log(items, typeof items)
   return (
     <Box>
-      {dbItems && dbItems.length > 0 ? (
+      {items && items.length > 0 ? (
         <Accordion allowToggle>
-          {dbItems.map((item, index) => {
+          {items.map((item, index) => {
             const {
               name,
               id,

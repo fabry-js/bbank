@@ -6,7 +6,7 @@ import { HiOutlinePhotograph } from "react-icons/hi";
 import { ImStack } from "react-icons/im";
 import { BsCalendarDate, BsPerson } from "react-icons/bs";
 
-import { Item } from "../models/items";
+import { Item } from "../../../../../../models/items";
 
 export const ItemComponent: FC<Item> = ({
   addedBy,

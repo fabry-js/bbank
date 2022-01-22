@@ -1,5 +1,5 @@
 import { Box, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
-import { FC } from "react";
+import { FC, useContext } from "react";
 import { MUpper } from "../pages/MaxUpperComponent";
 import { Analysis } from "./tabs/analysis/Analysis";
 import { Movement } from "./tabs/movement/Movement";
@@ -7,6 +7,7 @@ import { Settings } from "./tabs/settings/Settings";
 import { IoAnalyticsOutline } from "react-icons/io5";
 import { CgArrowsExchangeAlt } from "react-icons/cg";
 import { FiSettings } from "react-icons/fi";
+import { UserContext } from "../providers/GAuthProvider";
 
 export const Dashboard: FC = () => {
   return (

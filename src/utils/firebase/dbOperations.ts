@@ -1,7 +1,7 @@
 // CRUD Pattern is always the best choice, isn't it?
 
 import { collection, getDocs } from "firebase/firestore";
-import { Item } from "../../dashboard/tabs/movement/movement-components/actions/models/items";
+import { Item } from "../../models/items";
 import { _firestore } from "./firebase";
 
 export const insertItemIntoDatabase = async () => {
@@ -16,10 +16,10 @@ export const updateItemToDatabase = async () => {
   console.log("Ok!");
 };
 // Retrieve is always shown.
-export const retrieveAllItemsFromDatabase = async (user: any): Promise<Item[]>=> {
+export const retrieveAllItemsFromDatabase = async (email: any): Promise<Item[]>=> {
   return new Promise<Item[]>(async (resolve, reject) => {
     try {
-      const qs = await getDocs(collection(_firestore, user.email));
+      const qs = await getDocs(collection(_firestore, email));
       let resArr: Item[] = []
       qs.forEach((doc) => {
         return resArr.push(doc.data() as Item);
