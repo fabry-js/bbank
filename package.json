@@ -1,5 +1,5 @@
 {
-  "name": "boxes",
+  "name": "bbank",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
@@ -7,8 +7,21 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@chakra-ui/react": "^1.7.3",
+    "@emotion/react": "^11.7.1",
+    "@emotion/styled": "^11.6.0",
+    "@reduxjs/toolkit": "^1.7.1",
+    "dotenv": "^10.0.0",
+    "firebase": "^9.6.1",
+    "framer-motion": "^5.5.5",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "react-firebase-hooks": "^5.0.0",
+    "react-hook-form": "^7.22.5",
+    "react-icons": "^4.3.1",
+    "react-redux": "^7.2.6",
+    "react-router": "^6.2.1",
+    "react-router-dom": "^6.2.1"
   },
   "devDependencies": {
     "@types/react": "^17.0.33",
