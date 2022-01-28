@@ -6,7 +6,7 @@ const Logo = (props: any) => {
     <Box {...props}>
       <SimpleGrid columns={[1, 2]}>
         <Text fontWeight="semibold">
-          📦 boxes.
+        bbank.
         </Text>
       </SimpleGrid>
     </Box>

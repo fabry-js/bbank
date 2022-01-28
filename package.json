@@ -1,5 +1,5 @@
 {
-  "name": "boxes",
+  "name": "bbank",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
@@ -16,6 +16,7 @@
     "framer-motion": "^5.5.5",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-firebase-hooks": "^5.0.0",
     "react-hook-form": "^7.22.5",
     "react-icons": "^4.3.1",
     "react-redux": "^7.2.6",

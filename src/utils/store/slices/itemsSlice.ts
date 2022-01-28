@@ -1,24 +1,25 @@
-import { createSelector, createSlice } from "@reduxjs/toolkit";
+import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Item } from "../../../models/items";
-import { retrieveAllItemsFromDatabase } from "../../firebase/dbOperations";
 
 const slice = createSlice({
   name: "items",
   initialState: {
-    items: [] as any
+    items: [] as Item[]
     // spostare fuori dalla funzione il push
   },
   reducers: {
-    retrieveAllDbItems: (state) => {
-      const email = "vivaldifabrizio10@gmail.com"
-      retrieveAllItemsFromDatabase(email).then((items) => {
-        return items.forEach((item) => state.items.push(item));
-      });
+    memorizeItem: (state, action: PayloadAction<Item>) => {
+      state.items.push({
+        ...action.payload
+      })
     },
+    removeAllMemorizedDBItems: (state) => {
+      state.items.length = 0;
+    }
   },
 });
 
-export const { retrieveAllDbItems } = slice.actions;
+export const { memorizeItem, removeAllMemorizedDBItems } = slice.actions;
 
 export default slice.reducer;
 

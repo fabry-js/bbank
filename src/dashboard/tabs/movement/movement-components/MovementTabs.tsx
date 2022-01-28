@@ -1,6 +1,6 @@
 import { Box, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
 import { FC } from "react";
-import { DepositTab } from "./actions/Deposit";
+import { DepositTab } from "./actions/deposit/Deposit";
 import { RetrieveTab } from "./actions/Retrieve";
 import { StatusTab } from "./actions/Status";
 import { GrStatusInfo } from "react-icons/gr";
